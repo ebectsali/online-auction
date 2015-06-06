@@ -1,0 +1,14 @@
+<?php 
+    if($datalelang['batas_lelang']<$tglsekarang){
+	 $query=mysql_query("SELECT penawaran.id_penawaran, member.nama_member FROM penawaran,member WHERE penawaran.id_member=member.id_member and id_lelang='$_GET[id_lelang]' order by nominal_penawaran DESC ");
+	 $pemenang=mysql_fetch_array($query);
+	    
+    echo "<p class='text-info text-center'>Selamat Pemenang lelang jatuh kepada </br><b><i>".$pemenang['nama_member']."</i></b></p>";
+	     
+	   if($pemenang['nama_member']==$point['nama_member']){
+	   $querybayar=mysql_query("SELECT * FROM penawaran WHERE nominal_penawaran='$pemenang[nominal]' ");
+	   $bayar=mysql_fetch_array($querybayar);
+	   echo "<p class='text-center'><a href='?page=info&id_penawaran=".$pemenang['id_penawaran']. "' class=' btn btn-success' ><i class='glyphicon glyphicon-tag'></i>  Lajutkan Transaksi</a></p>";
+	  } 
+	 } 
+	 ?>
